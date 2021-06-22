@@ -1,8 +1,7 @@
-export class capacity extends Object {
+export class capacity {
   value = null;
 
   constructor(value) {
-    console.log(value);
     this.value = value;
   }
 

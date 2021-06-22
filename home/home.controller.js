@@ -27,27 +27,35 @@ class HomeCtrl {
       { connection_speed: 2024, created: new Date('2021-06-21 19:09:00') }
     ];
 
-    console.log(parse(template, plurals));
-
     const MessageFormat = require('messageformat');
     const mf = new MessageFormat('ru').addFormatters({
-      compact: value => value
+      compact: value => {
+        let result = value;
+        if (value.hasOwnProperty('value')) {
+          if (value.constructor.name === 'capacity') {
+            value.value = new Intl.NumberFormat().format(value.value);
+          }
+          if (value.constructor.name === 'date') {
+            value.value = new Intl.DateTimeFormat().format(value.value);
+          }
+
+          result = value.toString();
+        }
+
+        return result;
+      }
     });
     const mfCmp = mf.compile(template);
-
-    console.log(mfCmp);
 
     this.content = data
       .map(item =>
         Object.keys(item).reduce((acc, key) => {
-          console.log(acc, key, types[key].type, factory);
-          acc[key] = factory[types[key].type];
+          acc[key] = new factory[types[key].type](item[key]);
           return acc;
         }, {})
       )
       .map(item => mfCmp(item))
       .join();
-    console.log(this.content);
   }
 }
 

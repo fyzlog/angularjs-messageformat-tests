@@ -1,8 +1,7 @@
-export class date extends Object {
+export class date {
   value = null;
 
   constructor(value) {
-    console.log(value);
     this.value = value;
   }
 

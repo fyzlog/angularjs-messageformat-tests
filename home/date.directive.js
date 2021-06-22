@@ -6,8 +6,8 @@ export const DateDirective = [
     bindToController: {
       value: '<'
     },
+    link($scope) {},
     controller: ['$scope', function($scope) {}],
-    controllerAs: '$ctrl',
-    link($scope) {}
+    controllerAs: '$ctrl'
   })
 ];
