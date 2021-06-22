@@ -1,0 +1,13 @@
+{
+  "name": "angularjs-tkypv2",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@uirouter/angularjs": "1.0.29",
+    "angular": "1.8.2",
+    "angular-sanitize": "1.8.2",
+    "make-plural": "3.0.6",
+    "messageformat": "1.0.2",
+    "messageformat-parser": "1.1.0"
+  }
+}
