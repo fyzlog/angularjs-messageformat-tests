@@ -31,10 +31,9 @@ homeModule.directive('bindHtmlCompile', [
 import HomeCtrl from './home.controller';
 homeModule.controller('HomeCtrl', HomeCtrl);
 
-import { DateDirective } from './date.directive';
+// Directives
+import { CapacityDirective, DateDirective } from './directives';
 homeModule.directive('mfDate', DateDirective);
-
-import { CapacityDirective } from './capacity.directive';
 homeModule.directive('mfCapacity', CapacityDirective);
 
 export default homeModule;

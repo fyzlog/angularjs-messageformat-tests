@@ -1,5 +1,4 @@
-import { capacity } from './capacity.type';
-import { date } from './date.type';
+import { capacity, date } from './types';
 
 class HomeCtrl {
   constructor($scope, $sce, $compile, $interpolate) {
@@ -30,17 +29,16 @@ class HomeCtrl {
     const MessageFormat = require('messageformat');
     const mf = new MessageFormat('ru').addFormatters({
       compact: value => {
-        let result = value;
-        if (value.hasOwnProperty('value')) {
-          if (value.constructor.name === 'capacity') {
-            value.value = new Intl.NumberFormat().format(value.value);
-          }
-          if (value.constructor.name === 'date') {
-            value.value = new Intl.DateTimeFormat().format(value.value);
-          }
+        const handlers = {
+          capacity: new Intl.NumberFormat().format,
+          date: new Intl.DateTimeFormat().format
+        };
 
-          result = value.toString();
-        }
+        let result =
+          value.constructor.name && handlers[value.constructor.name]
+            ? ((value.value = handlers[value.constructor.name](value.value)),
+              value.toString())
+            : value;
 
         return result;
       }
